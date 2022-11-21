@@ -1,4 +1,6 @@
 import pygame
+from Fighter import Fighter
+
 pygame.init()
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
@@ -17,6 +19,9 @@ run = True
 while run:
 
     draw_bg()
+    
+    fighter_1.draw(screen)
+    fighter_2.draw(screen)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
