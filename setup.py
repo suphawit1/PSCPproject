@@ -14,7 +14,7 @@ def draw_bg():
     screen.blit(scaled_bg, (0, 0))
 
 fighter_1 = Fighter(200, 310)
-fighter_2 = Fighter(700, 300)
+fighter_2 = Fighter(700, 310)
 run = True
 while run:
 
