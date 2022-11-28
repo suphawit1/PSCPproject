@@ -1,7 +1,7 @@
 import pygame
 
 class Fighter():
-    def __initpp__(self, x, y):
+    def __init__(self, x, y):
         self.rect = pygame.Rect((x, y, 80, 180))
         self.vel_y = 0
         self.jump = False
