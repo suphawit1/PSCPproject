@@ -94,19 +94,19 @@ class Fighter():
         self.rect.y += dy
 
     #animation update
-    def update(self):
+    def update(self, animationrow):
         #check action
         if self.health <= 0:
             self.health = 0
             self.alive = False
-            self.update_action(6)
+            self.update_action(6 - animationrow)
         elif self.hit == True:
-            self.update_action(5)
+            self.update_action(5 - animationrow)
         elif self.attacking == True:
             if self.attack_type == 1:
                 self.update_action(3)
             elif self.attack_type == 2:
-                self.update_action(4)
+                self.update_action(4 - animationrow)
         elif self.jump == True:
             self.update_action(2)
         elif self.running == True:
@@ -142,7 +142,7 @@ class Fighter():
             if attacking_rect.colliderect(target.rect):
                 target.health -= 10
                 target.hit = True
-            #pygame.draw.rect(surface, (0, 255, 0), attacking_rect)
+        #pygame.draw.rect(surface, (0, 255, 0), attacking_rect)
 
     def update_action(self, new_action):
         if new_action != self.action:
