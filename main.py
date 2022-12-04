@@ -12,7 +12,7 @@ clock = pygame.time.Clock()
 FPS = 60
 
 #charactor selection
-charselect = input()
+charselect = input("Charactor Select -> ")
 if charselect == "0":
     STICKMAN_SIZE = 348
     STICKMAN_SCALE = 0.7
