@@ -34,6 +34,13 @@ Red = (255, 0, 0)
 Yellow = (255, 255, 0)
 White = (255, 255, 255)
 
+#define game variables
+intro_count = 0
+las_count_update = pygame.time.get_ticks()
+score = [0, 0]
+round_over = False
+ROUND_OVER_COOLDOWN = 2000
+
 #define fighter cariable
 #STICKMAN_SIZE = 35
 #STICKMAN_SCALE = 7
@@ -44,7 +51,17 @@ bg_image = pygame.image.load("assets/bg2.png").convert_alpha()
 #sheet load
 #stickman_sheet = pygame.image.load("assets/Hammer/hammer.png").convert_alpha()
 
+#load victory image
+victory_img = pygame.image.load("assets/victory.png").convert_alpha()
 
+#define font
+count_font = pygame.font.Font("assets/turok.ttf", 80)
+score_font = pygame.font.Font("assets/turok.ttf", 30)
+
+#function for drawing text
+def draw_text(text, font, text_col, x, y):
+    img = font.render(text, True, text_col)
+    screen.blit(img, (x, y))
 #set step animation
 #TEST_ANIMATION_STEP = [9, 6, 1, 7, 3, 7]
 def draw_bg():
@@ -58,8 +75,8 @@ def draw_health_bar(hrealth, x, y):
     pygame.draw.rect(screen, Red, (x, y, 400, 30))
     pygame.draw.rect(screen, Yellow, (x, y, 400 * ratio, 30))
 
-fighter_1 = Fighter(200, 310, False, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
-fighter_2 = Fighter(700, 310, True, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
+fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
+fighter_2 = Fighter(2, 700, 310, True, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
 run = True
 while run:
 
@@ -70,16 +87,47 @@ while run:
     #show player stats
     draw_health_bar(fighter_1.health, 20, 20)
     draw_health_bar(fighter_2.health, 580, 20)
-
-    fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_2)
-    #fighter_2.move()
+    draw_text("P1: " + str(score[0]), score_font, Red, 20, 60)
+    draw_text("P2: " + str(score[1]), score_font, Red, 580, 60)
     
+    #update countdown
+    if intro_count <= 0:
+        #move fighters
+        fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_2, round_over)
+        fighter_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_1, round_over)
+    else:
+        #display count timer
+        draw_text(str(intro_count), count_font, Red, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3)
+        #update count timer
+        if (pygame.time.get_ticks() - las_count_update) >= 1000:
+            intro_count -= 1
+            las_count_update = pygame.time.get_ticks()
+
     #update fighter
     fighter_1.update(NUMBER_ATTACK_TYPE)
     fighter_2.update(NUMBER_ATTACK_TYPE)
 
     fighter_1.draw(screen)
     fighter_2.draw(screen)
+
+    #check for player defeat
+    if round_over == False:
+        if fighter_1.alive == False:
+            score[1] += 1
+            round_over = True
+            round_over_time = pygame.time.get_ticks()
+        elif fighter_2.alive == False:
+            score[0] += 1
+            round_over = True
+            round_over_time = pygame.time.get_ticks()
+    else:
+        #display victory image
+        screen.blit(victory_img, (360, 150))
+        if pygame.time.get_ticks() - round_over_time > ROUND_OVER_COOLDOWN:
+            round_over = False
+            intro_count = 3
+            fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
+            fighter_2 = Fighter(2, 700, 310, True, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
