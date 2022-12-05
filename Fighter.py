@@ -155,7 +155,7 @@ class Fighter():
                     self.attacking = False
                     self.attack_cooldown = 50
                 #check if damage was taken
-                if self.action == 5:
+                if self.action == 5 or self.action == 4:
                     self.hit = False
                     #if was player in middle of attck
                     self.attacking = False
@@ -179,4 +179,3 @@ class Fighter():
     def draw(self, surface):
         img = pygame.transform.flip(self.image, self.flip, False)
         surface.blit(img, (self.rect.x - (self.offset[0] * self.image_scale), self.rect.y - (self.offset[1] * self.image_scale)))
-        
