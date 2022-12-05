@@ -46,7 +46,7 @@ class Fighter():
 
         key = pygame.key.get_pressed()
         #can only perfrom other action if not currently attacking
-        if self.attacking == False and self.alive == True and round_over == False:
+        if self.attacking == False and self.alive == True and round_over == False and self.hit == False:
             #check player 1 control
             if self.player == 1:
             #movement
@@ -165,7 +165,10 @@ class Fighter():
         if self.attack_cooldown == 0:
             self.attacking = True
             attacking_rect = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height)
-            if attacking_rect.colliderect(target.rect):
+            if self.action == 5 or self.action == 4:
+                    self.attacking = False
+                    self.attack_cooldown = 50
+            if attacking_rect.colliderect(target.rect) and self.attacking == True:
                 target.health -= 10
                 target.hit = True
 
