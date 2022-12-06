@@ -12,8 +12,10 @@ clock = pygame.time.Clock()
 FPS = 60
 
 #charactor selection
-charselect = input("Charactor Select -> ")
-if charselect == "0":
+print("Charactor list -> 0:demo 1:hammer")
+charselect1 = input("Charactor 1 Select -> ")
+charselect2 = input("Charactor 2 Select -> ")
+if charselect1 == "0" and charselect2 == "0":
     STICKMAN_SIZE = 348
     STICKMAN_SCALE = 0.7
     STICKMAN_OFFSET = [120, 80]
@@ -21,7 +23,29 @@ if charselect == "0":
     stickman_sheet = pygame.image.load("assets/Sprite Sheet/sheetdemo.png").convert_alpha()
     TEST_ANIMATION_STEP = [7, 5, 1, 4, 4, 3, 6]
     NUMBER_ATTACK_TYPE = 0 #0 = 2 atktpye
-elif charselect == "1":
+    STICKMAN_SIZE = 348
+    STICKMAN_SCALE = 0.7
+    STICKMAN_OFFSET = [120, 80]
+    STICKMAN_DATA1 = [STICKMAN_SIZE, STICKMAN_SCALE, STICKMAN_OFFSET]
+    stickman_sheet1 = pygame.image.load("assets/Sprite Sheet/sheetdemo.png").convert_alpha()
+    TEST_ANIMATION_STEP1 = [7, 5, 1, 4, 4, 3, 6]
+    NUMBER_ATTACK_TYPE1 = 0 #0 = 2 atktpye
+elif charselect1 == "0" and charselect2 == "1":
+    STICKMAN_SIZE = 348
+    STICKMAN_SCALE = 0.7
+    STICKMAN_OFFSET = [120, 80]
+    STICKMAN_DATA = [STICKMAN_SIZE, STICKMAN_SCALE, STICKMAN_OFFSET]
+    stickman_sheet = pygame.image.load("assets/Sprite Sheet/sheetdemo.png").convert_alpha()
+    TEST_ANIMATION_STEP = [7, 5, 1, 4, 4, 3, 6]
+    NUMBER_ATTACK_TYPE = 0 #0 = 2 atktpye
+    STICKMAN_SIZE = 35
+    STICKMAN_SCALE = 7
+    STICKMAN_OFFSET = [12, 9]
+    STICKMAN_DATA1 = [STICKMAN_SIZE, STICKMAN_SCALE, STICKMAN_OFFSET]
+    stickman_sheet1 = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
+    TEST_ANIMATION_STEP1 = [9, 6, 1, 7, 3, 7]
+    NUMBER_ATTACK_TYPE1 = 1 #1 = 1 atktype
+elif charselect1 == "1" and charselect2 == "0":
     STICKMAN_SIZE = 35
     STICKMAN_SCALE = 7
     STICKMAN_OFFSET = [12, 9]
@@ -29,6 +53,29 @@ elif charselect == "1":
     stickman_sheet = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
     TEST_ANIMATION_STEP = [9, 6, 1, 7, 3, 7]
     NUMBER_ATTACK_TYPE = 1 #1 = 1 atktype
+    STICKMAN_SIZE = 348
+    STICKMAN_SCALE = 0.7
+    STICKMAN_OFFSET = [120, 80]
+    STICKMAN_DATA1 = [STICKMAN_SIZE, STICKMAN_SCALE, STICKMAN_OFFSET]
+    stickman_sheet1 = pygame.image.load("assets/Sprite Sheet/sheetdemo.png").convert_alpha()
+    TEST_ANIMATION_STEP1 = [7, 5, 1, 4, 4, 3, 6]
+    NUMBER_ATTACK_TYPE1 = 0 #0 = 2 atktpye
+elif charselect1 == "1" and charselect2 == "1":
+    STICKMAN_SIZE = 35
+    STICKMAN_SCALE = 7
+    STICKMAN_OFFSET = [12, 9]
+    STICKMAN_DATA = [STICKMAN_SIZE, STICKMAN_SCALE, STICKMAN_OFFSET]
+    stickman_sheet = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
+    TEST_ANIMATION_STEP = [9, 6, 1, 7, 3, 7]
+    NUMBER_ATTACK_TYPE = 1 #1 = 1 atktype
+    STICKMAN_SIZE = 35
+    STICKMAN_SCALE = 7
+    STICKMAN_OFFSET = [12, 9]
+    STICKMAN_DATA1 = [STICKMAN_SIZE, STICKMAN_SCALE, STICKMAN_OFFSET]
+    stickman_sheet1 = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
+    TEST_ANIMATION_STEP1 = [9, 6, 1, 7, 3, 7]
+    NUMBER_ATTACK_TYPE1 = 1 #1 = 1 atktype
+
 #define colors
 Red = (255, 0, 0)
 Yellow = (255, 255, 0)
@@ -76,7 +123,7 @@ def draw_health_bar(hrealth, x, y):
     pygame.draw.rect(screen, Yellow, (x, y, 400 * ratio, 30))
 
 fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
-fighter_2 = Fighter(2, 700, 310, True, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
+fighter_2 = Fighter(2, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, TEST_ANIMATION_STEP1)
 run = True
 while run:
 
@@ -105,7 +152,7 @@ while run:
 
     #update fighter
     fighter_1.update(NUMBER_ATTACK_TYPE)
-    fighter_2.update(NUMBER_ATTACK_TYPE)
+    fighter_2.update(NUMBER_ATTACK_TYPE1)
 
     fighter_1.draw(screen)
     fighter_2.draw(screen)
@@ -127,11 +174,11 @@ while run:
             round_over = False
             intro_count = 3
             fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
-            fighter_2 = Fighter(2, 700, 310, True, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
+            fighter_2 = Fighter(2, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, TEST_ANIMATION_STEP1)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-    
+
     pygame.display.update()
 pygame.quit()
