@@ -15,6 +15,7 @@ FPS = 60
 print("Charactor list -> 0:demo 1:hammer 2:samurai")
 charselect1 = input("Charactor 1 Select -> ")
 charselect2 = input("Charactor 2 Select -> ")
+playmode = int(input("Select Mode // 0:PVP 1:IMPOSIBLE BOT -> 2:Nolmal Bot"))
 charrector = {"0":([348, 0.7, [120, 80]], [7, 5, 1, 4, 4, 3, 6], 0), "1":([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1), "2":([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1)}
 demo = pygame.image.load("assets/Sprite Sheet/sheetdemo.png").convert_alpha()
 hammer = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
@@ -78,7 +79,7 @@ def draw_health_bar(hrealth, x, y):
     pygame.draw.rect(screen, Yellow, (x, y, 400 * ratio, 30))
 
 fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, ANIMATION_STEP)
-fighter_2 = Fighter(2, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, ANIMATION_STEP1)
+fighter_2 = Fighter(2+playmode, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, ANIMATION_STEP1)
 run = True
 while run:
 
@@ -129,7 +130,7 @@ while run:
             round_over = False
             intro_count = 3
             fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, ANIMATION_STEP)
-            fighter_2 = Fighter(2, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, ANIMATION_STEP1)
+            fighter_2 = Fighter(2+playmode, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, ANIMATION_STEP1)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

@@ -1,4 +1,5 @@
 import pygame
+import random
 
 class Fighter():
     def __init__(self, player, x, y, flip, data, sprite_sheet, animation_steps):
@@ -21,7 +22,12 @@ class Fighter():
         self.attack_cooldown = 0
         self.hit = False
         self.health = 100
+        self.healthbot = 100
         self.alive = True
+        self.bot = 4
+        self.state = pygame.time.get_ticks()
+        self.fallback = pygame.time.get_ticks()
+        self.randomaction = [4]
     
 
     def load_images(self, sprite_sheet, animation_steps):
@@ -98,6 +104,60 @@ class Fighter():
                 else:
                     self.tag = True
 
+            #bot Imposible
+            if self.player == 3:
+                attacking_range = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height)
+                if attacking_range.colliderect(target.rect):
+                    self.attack(target)
+                    attacktype = [1, 2]
+                    x = (random.choice(attacktype))
+                    self.attack_type = x
+                elif self.rect.x - (self.offset[0] * self.image_scale) < target.rect.x - (target.offset[0] * target.image_scale):
+                    dx = SPEED
+                    self.running = True
+                elif self.rect.x - (self.offset[0] * self.image_scale) > target.rect.x - (target.offset[0] * target.image_scale):
+                    dx = -SPEED
+                    self.running = True
+            #nolmalbot
+            if self.player == 4:
+                attacking_range = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height)
+                goforatk = [1, 0, 0, 0] #1 changestate
+                if self.healthbot > self.health:
+                    if self.rect.x - (self.offset[0] * self.image_scale) < target.rect.x - (target.offset[0] * target.image_scale):
+                        self.randomaction = [0]
+                    else:
+                        self.randomaction = [1]
+                    self.healthbot = self.health
+                    
+                elif pygame.time.get_ticks()- self.fallback > 50:
+                    state = random.choice(goforatk)
+                    self.fallback = pygame.time.get_ticks()
+                    if attacking_range.colliderect(target.rect) and state == 1:
+                        self.randomaction = [2, 2, 3, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]#0runleft #1runright #2attack #3jump #4 idle
+                    elif self.rect.x - (self.offset[0] * self.image_scale) < target.rect.x - (target.offset[0] * target.image_scale) and state == 1:
+                        self.randomaction = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 4, 4, 4, 4, 4, 4, 4]
+                    elif self.rect.x - (self.offset[0] * self.image_scale) > target.rect.x - (target.offset[0] * target.image_scale) and state == 1:
+                        self.randomaction = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 4, 4, 4, 4, 4, 4]
+                changestate_cooldown = 50
+                if pygame.time.get_ticks() - self.state > changestate_cooldown:
+                    self.bot = (random.choice(self.randomaction))
+                    self.state = pygame.time.get_ticks()
+                if self.bot == 0:
+                    dx = -SPEED
+                    self.running = True
+                elif self.bot == 1:
+                    dx = SPEED
+                    self.running = True
+                elif self.bot == 2:
+                    self.attack(target)
+                    attacktype = [1, 2]
+                    y = (random.choice(attacktype))
+                    self.attack_type = y
+                elif self.bot == 3 and self.jump == False:
+                    self.vel_y = -30
+                    self.jump = True
+
+
         #apply gravity    
         self.vel_y += GRAVITY
         dy += self.vel_y
@@ -146,9 +206,9 @@ class Fighter():
             self.update_action(1)
         else:
             self.update_action(0)
-        animation_cooldow = 70
+        animation_cooldow = [80, 50, 50, 60, 80, 80, 80]
         self.image = self.animation_list[self.action][self.frame_index]
-        if pygame.time.get_ticks() - self.update_time > animation_cooldow:
+        if pygame.time.get_ticks() - self.update_time > animation_cooldow[self.action]:
             self.frame_index += 1
             self.update_time = pygame.time.get_ticks()
         if self.frame_index >= len(self.animation_list[self.action]):
@@ -187,7 +247,6 @@ class Fighter():
 
 
     
-
     def draw(self, surface, tag):
         font = pygame.font.Font("assets/turok.ttf", 30)
         img = pygame.transform.flip(self.image, self.flip, False)
