@@ -124,16 +124,16 @@ class Fighter():
                 goforatk = [1, 0, 0, 0] #1 changestate
                 if self.healthbot > self.health:
                     if self.rect.x - (self.offset[0] * self.image_scale) < target.rect.x - (target.offset[0] * target.image_scale):
-                        self.randomaction = [0]
+                        self.randomaction = [0, 0, 3]
                     else:
-                        self.randomaction = [1]
+                        self.randomaction = [1, 1, 3]
                     self.healthbot = self.health
                     
                 elif pygame.time.get_ticks()- self.fallback > 50:
                     state = random.choice(goforatk)
                     self.fallback = pygame.time.get_ticks()
                     if attacking_range.colliderect(target.rect) and state == 1:
-                        self.randomaction = [2, 2, 3, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]#0runleft #1runright #2attack #3jump #4 idle
+                        self.randomaction = [2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4]#0runleft #1runright #2attack #3jump #4 idle
                     elif self.rect.x - (self.offset[0] * self.image_scale) < target.rect.x - (target.offset[0] * target.image_scale) and state == 1:
                         self.randomaction = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 4, 4, 4, 4, 4, 4, 4]
                     elif self.rect.x - (self.offset[0] * self.image_scale) > target.rect.x - (target.offset[0] * target.image_scale) and state == 1:
@@ -154,7 +154,12 @@ class Fighter():
                     y = (random.choice(attacktype))
                     self.attack_type = y
                 elif self.bot == 3 and self.jump == False:
-                    self.vel_y = -30
+                    jumpdirection = [0, 1]
+                    z = random.choice(jumpdirection)
+                    if z == 0:
+                        dx, self.vel_y = -SPEED, -30
+                    elif z == 1:
+                        dx, self.vel_y = SPEED, -30
                     self.jump = True
 
 
@@ -255,8 +260,10 @@ class Fighter():
         if tag == True:
             if self.player == 1:
                 img = font.render("P1", True, (0, 0, 255))
-            if self.player == 2:
+            elif self.player == 2:
                 img = font.render("P2", True, (0, 255, 0))
+            else:
+                img = font.render("BOT", True, (0, 255, 0))
             surface.blit(img, (self.rect.x+90 - (self.offset[0] * self.image_scale), self.rect.y-20 - (self.offset[1] * self.image_scale)))
             
         

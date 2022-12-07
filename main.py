@@ -15,7 +15,8 @@ FPS = 60
 print("Charactor list -> 0:demo 1:hammer 2:samurai")
 charselect1 = input("Charactor 1 Select -> ")
 charselect2 = input("Charactor 2 Select -> ")
-playmode = int(input("Select Mode // 0:PVP 1:IMPOSIBLE BOT -> 2:Nolmal Bot"))
+print("Mode list -> 0:PVP 1:IMPOSIIBLE BOT 2: Nolmal Bot")
+playmode = int(input("Select Mode -> "))
 charrector = {"0":([348, 0.7, [120, 80]], [7, 5, 1, 4, 4, 3, 6], 0), "1":([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1), "2":([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1)}
 demo = pygame.image.load("assets/Sprite Sheet/sheetdemo.png").convert_alpha()
 hammer = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
