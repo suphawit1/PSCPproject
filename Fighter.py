@@ -35,6 +35,7 @@ class Fighter():
         return animation_list
 
 
+
     def move(self, screen_width, screen_height, surface, target, round_over):
         SPEED = 10
         GRAVITY = 2
@@ -91,6 +92,12 @@ class Fighter():
                         self.attack_type = 1
                     if key[pygame.K_KP2]:
                         self.attack_type = 2
+            if key[pygame.K_TAB]:
+                if self.tag == True:
+                    self.tag = False
+                else:
+                    self.tag = True
+
         #apply gravity    
         self.vel_y += GRAVITY
         dy += self.vel_y
@@ -153,13 +160,13 @@ class Fighter():
                 #if attack was executed
                 if self.action == 3 or self.action == 4:
                     self.attacking = False
-                    self.attack_cooldown = 50
+                    self.attack_cooldown = 30
                 #check if damage was taken
                 if self.action == 5 or self.action == 4:
                     self.hit = False
                     #if was player in middle of attck
                     self.attacking = False
-                    self.attack_cooldown = 50
+                    self.attack_cooldown = 30
 
     def attack(self, target):
         if self.attack_cooldown == 0:
@@ -167,7 +174,7 @@ class Fighter():
             attacking_rect = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height)
             if self.action == 5 or self.action == 4:
                     self.attacking = False
-                    self.attack_cooldown = 50
+                    self.attack_cooldown = 30
             if attacking_rect.colliderect(target.rect) and self.attacking == True:
                 target.health -= 10
                 target.hit = True
@@ -179,6 +186,18 @@ class Fighter():
             self.update_time = pygame.time.get_ticks()
 
 
-    def draw(self, surface):
+    
+
+    def draw(self, surface, tag):
+        font = pygame.font.Font("assets/turok.ttf", 30)
         img = pygame.transform.flip(self.image, self.flip, False)
         surface.blit(img, (self.rect.x - (self.offset[0] * self.image_scale), self.rect.y - (self.offset[1] * self.image_scale)))
+        
+        if tag == True:
+            if self.player == 1:
+                img = font.render("P1", True, (0, 0, 255))
+            if self.player == 2:
+                img = font.render("P2", True, (0, 255, 0))
+            surface.blit(img, (self.rect.x+90 - (self.offset[0] * self.image_scale), self.rect.y-20 - (self.offset[1] * self.image_scale)))
+            
+        

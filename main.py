@@ -15,7 +15,7 @@ FPS = 60
 print("Charactor list -> 0:demo 1:hammer 2:samurai")
 charselect1 = input("Charactor 1 Select -> ")
 charselect2 = input("Charactor 2 Select -> ")
-charrector = {"0":([348, 0.7, [120, 8]], [7, 5, 1, 4, 4, 3, 6], 0), "1":([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1), "2":([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1)}
+charrector = {"0":([348, 0.7, [120, 80]], [7, 5, 1, 4, 4, 3, 6], 0), "1":([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1), "2":([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1)}
 demo = pygame.image.load("assets/Sprite Sheet/sheetdemo.png").convert_alpha()
 hammer = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
 samurai = pygame.image.load("assets/Sprite Sheet/samurai.png").convert_alpha()
@@ -24,6 +24,12 @@ STICKMAN_DATA, ANIMATION_STEP, NUMBER_ATTACK_TYPE = charrector[charselect1]
 STICKMAN_DATA1, ANIMATION_STEP1, NUMBER_ATTACK_TYPE1 = charrector[charselect2]
 stickman_sheet = charsheet[int(charselect1)]
 stickman_sheet1 = charsheet[int(charselect2)]
+
+#show tag if same charctor
+tag = False
+if stickman_sheet == stickman_sheet1:
+    tag = True
+
 
 #define colors
 Red = (255, 0, 0)
@@ -103,8 +109,8 @@ while run:
     fighter_1.update(NUMBER_ATTACK_TYPE)
     fighter_2.update(NUMBER_ATTACK_TYPE1)
 
-    fighter_1.draw(screen)
-    fighter_2.draw(screen)
+    fighter_1.draw(screen, tag)
+    fighter_2.draw(screen, tag)
 
     #check for player defeat
     if round_over == False:
