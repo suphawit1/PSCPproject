@@ -122,8 +122,8 @@ while run:
         if pygame.time.get_ticks() - round_over_time > ROUND_OVER_COOLDOWN:
             round_over = False
             intro_count = 3
-            fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, TEST_ANIMATION_STEP)
-            fighter_2 = Fighter(2, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, TEST_ANIMATION_STEP1)
+            fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, ANIMATION_STEP)
+            fighter_2 = Fighter(2, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, ANIMATION_STEP1)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
