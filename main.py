@@ -50,8 +50,8 @@ def load_images(sprite_sheet, animation_steps):
 def draw_text(text, font, text_col, x, y):
     img = font.render(text, True, text_col)
     screen.blit(img, (x, y))
-#set step animation
-#TEST_ANIMATION_STEP = [9, 6, 1, 7, 3, 7]
+
+
 def draw_bg():
     scaled_bg = pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
     screen.blit(scaled_bg, (0, 0))
@@ -188,12 +188,6 @@ while charrector_selection:
     pygame.display.update()
     
 
-#charactor selection
-#print("Charactor list -> 0:demo 1:hammer 2:samurai")
-#charselect1 = input("Charactor 1 Select -> ")
-#charselect2 = input("Charactor 2 Select -> ")
-#print("Mode list -> 0:PVP 1:IMPOSIIBLE BOT 2: Nolmal Bot")
-#playmode = int(input("Select Mode -> "))
 charrector = {0:([348, 0.7, [120, 80]], [7, 5, 1, 4, 4, 3, 6], 0), 1:([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1), 2:([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1)}
 demo = pygame.image.load("assets/Sprite Sheet/sheetdemo.png").convert_alpha()
 hammer = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
