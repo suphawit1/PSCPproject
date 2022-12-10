@@ -16,7 +16,7 @@ FPS = 60
 #load sounds
 pygame.mixer.music.load("assets/bgsound.mp3")
 pygame.mixer.music.set_volume(0.5)
-#pygame.mixer.music.play(-1, 0.0, 5000)
+pygame.mixer.music.play(-1, 0.0, 5000)
 sword_fx = pygame.mixer.Sound("assets/sword.wav")
 sword_fx.set_volume(0.3)
 hammer_fx = pygame.mixer.Sound("assets/hammer.mp3")
