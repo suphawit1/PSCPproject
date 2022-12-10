@@ -1,6 +1,8 @@
 import pygame
+from pygame import mixer
 from Fighter import Fighter
 
+mixer.init()
 pygame.init()
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
@@ -11,6 +13,14 @@ pygame.display.set_caption("Battle of Stickman")
 clock = pygame.time.Clock()
 FPS = 60
 
+#load sounds
+pygame.mixer.music.load("assets/bgsound.mp3")
+pygame.mixer.music.set_volume(0.5)
+#pygame.mixer.music.play(-1, 0.0, 5000)
+sword_fx = pygame.mixer.Sound("assets/sword.wav")
+sword_fx.set_volume(0.3)
+hammer_fx = pygame.mixer.Sound("assets/hammer.mp3")
+hammer_fx.set_volume(0.2)
 
 #define colors
 Red = (255, 0, 0)
@@ -190,13 +200,13 @@ while True:
         pygame.display.update()
         
 
-    charrector = {0:([348, 0.7, [120, 80]], [7, 5, 1, 4, 4, 3, 6], 0), 1:([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1), 2:([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1)}
+    charrector = {0:([348, 0.7, [120, 80]], [7, 5, 1, 4, 4, 3, 6], 0), 1:([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1, hammer_fx), 2:([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1, sword_fx)}
     demo = pygame.image.load("assets/Sprite Sheet/sheetdemo.png").convert_alpha()
     hammer = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
     samurai = pygame.image.load("assets/Sprite Sheet/samurai.png").convert_alpha()
     charsheet = [demo, hammer, samurai]
-    STICKMAN_DATA, ANIMATION_STEP, NUMBER_ATTACK_TYPE = charrector[charselect1]
-    STICKMAN_DATA1, ANIMATION_STEP1, NUMBER_ATTACK_TYPE1 = charrector[charselect2]
+    STICKMAN_DATA, ANIMATION_STEP, NUMBER_ATTACK_TYPE, sound = charrector[charselect1]
+    STICKMAN_DATA1, ANIMATION_STEP1, NUMBER_ATTACK_TYPE1, sound1 = charrector[charselect2]
     stickman_sheet = charsheet[int(charselect1)]
     stickman_sheet1 = charsheet[int(charselect2)]
 
@@ -207,8 +217,8 @@ while True:
 
 
 
-    fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, ANIMATION_STEP)
-    fighter_2 = Fighter(2+playmode, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, ANIMATION_STEP1)
+    fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, ANIMATION_STEP, sound)
+    fighter_2 = Fighter(2+playmode, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, ANIMATION_STEP1, sound1)
     run = True
     while run:
 
@@ -261,8 +271,8 @@ while True:
             if pygame.time.get_ticks() - round_over_time > ROUND_OVER_COOLDOWN:
                 round_over = False
                 intro_count = 3
-                fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, ANIMATION_STEP)
-                fighter_2 = Fighter(2+playmode, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, ANIMATION_STEP1)
+                fighter_1 = Fighter(1, 200, 310, False, STICKMAN_DATA, stickman_sheet, ANIMATION_STEP, sound)
+                fighter_2 = Fighter(2+playmode, 700, 310, True, STICKMAN_DATA1, stickman_sheet1, ANIMATION_STEP1, sound1)
         if key[pygame.K_ESCAPE]:
             run = False
         for event in pygame.event.get():
