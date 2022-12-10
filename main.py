@@ -34,6 +34,7 @@ victory_img = pygame.image.load("assets/victory.png").convert_alpha()
 count_font = pygame.font.Font("assets/turok.ttf", 80)
 score_font = pygame.font.Font("assets/turok.ttf", 30)
 subtext = pygame.font.Font("assets/turok.ttf", 20)
+subtext_mainmenu = pygame.font.SysFont("Adobe Gothic Std Kalin.ttf", 25)
 
 #function for drawing text
 
@@ -78,7 +79,7 @@ while True:
         screen.blit(scaled_bg, (0, 0))
         draw_text("Player vs Player", score_font, Red, 200, 400)
         draw_text("Play with Bot", score_font, Red, 600, 400)
-        draw_text("(Press Enter to continue)", subtext, Red, 0, 575)
+        draw_text("Press Enter to continue", subtext_mainmenu, Red, 5, 575)
         
         if playmode == 0:
             pygame.draw.rect(screen, Red, pygame.Rect(182, 370, 250, 100), 5)
@@ -124,17 +125,17 @@ while True:
         key = pygame.key.get_pressed()
         scaled_bg = pygame.transform.scale(mode_bgimmage, (SCREEN_WIDTH, SCREEN_HEIGHT))
         screen.blit(scaled_bg, (0, 0))
-        draw_text("Player 1", score_font, Red, 100, 50)
+        draw_text("Player 1", score_font, Red, 120, 50)
         draw_text(player, score_font, Red, 750, 50)
-        draw_text("(Press Enter to continue)", subtext, Red, 0, 575)
-        draw_text(charrector1, score_font, Red, 100, 500)
-        draw_text(charrector2, score_font, Red, 730, 500)
-        draw_text("A-D to select charlector", subtext, Red, 60, 545)
+        draw_text("Press Enter to continue", subtext_mainmenu, Red, 5, 575)
+        draw_text(charrector1, score_font, Yellow, 120, 500)
+        draw_text(charrector2, score_font, Yellow, 750, 500)
+        draw_text("A-D to select charlector", subtext, Red, 80, 545)
         draw_text("LEFT-RIGHT to select charlector", subtext, Red, 650, 545)
         image1 = idle_list[charselect1][frame_index]
         image2 = idle_list[charselect2][frame_index2]
         image2 = pygame.transform.flip(image2, True, False)
-        screen.blit(image1, (20,60))
+        screen.blit(image1, (10,60))
         screen.blit(image2, (580,60))
         if pygame.time.get_ticks() - update_time > idle_cooldow:
             frame_index += 1
@@ -222,7 +223,7 @@ while True:
         draw_health_bar(fighter_2.health, 580, 20)
         draw_text("P1: " + str(score[0]), score_font, Red, 20, 60)
         draw_text("P2: " + str(score[1]), score_font, Red, 580, 60)
-        draw_text("Press ESC to go back to main manu", subtext, Red, 0, 575)
+        draw_text("Press ESC to go back to main manu", subtext_mainmenu, Red, 5, 575)
         
         #update countdown
         if intro_count <= 0:
@@ -272,5 +273,3 @@ while True:
     for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-
-    
