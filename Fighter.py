@@ -104,22 +104,9 @@ class Fighter():
                 else:
                     self.tag = True
 
-            #bot Imposible
-            if self.player == 3:
-                attacking_range = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height)
-                if attacking_range.colliderect(target.rect):
-                    self.attack(target)
-                    attacktype = [1, 2]
-                    x = (random.choice(attacktype))
-                    self.attack_type = x
-                elif self.rect.x - (self.offset[0] * self.image_scale) < target.rect.x - (target.offset[0] * target.image_scale):
-                    dx = SPEED
-                    self.running = True
-                elif self.rect.x - (self.offset[0] * self.image_scale) > target.rect.x - (target.offset[0] * target.image_scale):
-                    dx = -SPEED
-                    self.running = True
+
             #nolmalbot
-            if self.player == 4:
+            if self.player == 3:
                 attacking_range = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height)
                 goforatk = [1, 0, 0, 0] #1 changestate
                 if self.healthbot > self.health:
