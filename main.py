@@ -21,7 +21,7 @@ sword_fx = pygame.mixer.Sound("assets/sword.wav")
 sword_fx.set_volume(0.3)
 hammer_fx = pygame.mixer.Sound("assets/hammer.mp3")
 hammer_fx.set_volume(0.2)
-gun_fx = pygame.mixer.Sound("assets/shotgun-firing-4-6746.mp3")
+gun_fx = pygame.mixer.Sound("assets/shotgun.mp3")
 gun_fx.set_volume(0.4)
 #define colors
 Red = (255, 0, 0)
