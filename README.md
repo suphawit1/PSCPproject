@@ -2,6 +2,8 @@ PSCPproject
 
 Battle of Stickman(pygame) - Stickman figthing game
 
+Open main.py to run game
+
 Player 1 Control
 A - moveleft
 D - moveright
