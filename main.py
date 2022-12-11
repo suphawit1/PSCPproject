@@ -21,7 +21,8 @@ sword_fx = pygame.mixer.Sound("assets/sword.wav")
 sword_fx.set_volume(0.3)
 hammer_fx = pygame.mixer.Sound("assets/hammer.mp3")
 hammer_fx.set_volume(0.2)
-
+gun_fx = pygame.mixer.Sound("assets/shotgun-firing-4-6746.mp3")
+gun_fx.set_volume(0.4)
 #define colors
 Red = (255, 0, 0)
 Yellow = (255, 255, 0)
@@ -117,9 +118,9 @@ while True:
     playerorbot = {0:"Player 2", 1:"Bot"}
     player = playerorbot[playmode]
     keypressdelay = pygame.time.get_ticks()
-    charname = ["stickman", "Hammer", "samurai"]
+    charname = ["gunner", "Hammer", "samurai"]
     idle_spritesheet = pygame.image.load("assets/Sprite Sheet/Idle.png").convert_alpha()
-    idle_step = [7, 9, 7]
+    idle_step = [8, 9, 7]
     idle_list = load_images(idle_spritesheet, idle_step)
     update_time = pygame.time.get_ticks()
     update_time2 = pygame.time.get_ticks()
@@ -200,8 +201,8 @@ while True:
         pygame.display.update()
         
 
-    charrector = {0:([348, 0.7, [120, 80]], [7, 5, 1, 4, 4, 3, 6], 0), 1:([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1, hammer_fx), 2:([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1, sword_fx)}
-    demo = pygame.image.load("assets/Sprite Sheet/sheetdemo.png").convert_alpha()
+    charrector = {0:([40, 7, [12, 15]], [8, 8, 1, 7, 3, 7], 1, gun_fx), 1:([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1, hammer_fx), 2:([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1, sword_fx)}
+    demo = pygame.image.load("assets/Sprite Sheet/gunner.png").convert_alpha()
     hammer = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
     samurai = pygame.image.load("assets/Sprite Sheet/samurai.png").convert_alpha()
     charsheet = [demo, hammer, samurai]
