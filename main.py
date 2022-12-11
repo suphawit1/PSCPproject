@@ -21,7 +21,7 @@ sword_fx = pygame.mixer.Sound("assets/sword.wav")
 sword_fx.set_volume(0.3)
 hammer_fx = pygame.mixer.Sound("assets/hammer.mp3")
 hammer_fx.set_volume(0.2)
-gun_fx = pygame.mixer.Sound("assets/shotgun.mp3")
+gun_fx = pygame.mixer.Sound("assets/shotgun-firing-4-6746.mp3")
 gun_fx.set_volume(0.4)
 #define colors
 Red = (255, 0, 0)
@@ -201,7 +201,7 @@ while True:
         pygame.display.update()
         
 
-    charrector = {0:([40, 7, [12, 15]], [8, 8, 1, 7, 3, 7], 1, gun_fx), 1:([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1, hammer_fx), 2:([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1, sword_fx)}
+    charrector = {0:([40, 6, [12, 11]], [8, 8, 1, 7, 3, 7], 1, gun_fx), 1:([35, 7, [12, 9]], [9, 6, 1, 7, 3, 7], 1, hammer_fx), 2:([400, 0.6, [150, 100]], [7, 6, 1, 7, 3, 9], 1, sword_fx)}
     demo = pygame.image.load("assets/Sprite Sheet/gunner.png").convert_alpha()
     hammer = pygame.image.load("assets/Sprite Sheet/hammer.png").convert_alpha()
     samurai = pygame.image.load("assets/Sprite Sheet/samurai.png").convert_alpha()
