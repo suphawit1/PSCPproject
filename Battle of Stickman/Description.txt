@@ -1,0 +1,24 @@
+PSCPproject
+
+Battle of Stickman(pygame) - Stickman figthing game
+
+Have 2 mode play:
+1.Player vs Player
+2.Player vs Bot
+
+Have 3 charactor:
+1.Gunner
+2.Hammer
+3.Samurai
+
+Player 1 Control
+A - moveleft
+D - moveright
+W - jump
+R,T - Attack
+
+Plater 2 Control
+Arrow to move
+Numpad 1,2 - Attack
+
+Enjoy,have fun
